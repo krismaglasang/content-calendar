@@ -47,4 +47,9 @@ public class ContentCollectionRepository {
                 "https://thinkingintensors.co.nz");
         contents.add(content);
     }
+
+    public void update(Content content) {
+        contents.removeIf(c -> c.id().equals(content.id()));
+        contents.add(content);
+    }
 }

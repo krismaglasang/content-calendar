@@ -2,6 +2,7 @@ package com.thinkingintensors.contentcalendar.controller;
 
 import com.thinkingintensors.contentcalendar.model.Content;
 import com.thinkingintensors.contentcalendar.repository.ContentCollectionRepository;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,7 +25,7 @@ public class ContentController {
     }
 
     @GetMapping("/{id}")
-    public Content findById(@PathVariable Integer id) {
+    public Content findById(@Valid @PathVariable Integer id) {
         return contentCollectionRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
@@ -34,7 +35,18 @@ public class ContentController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public void create(@RequestBody Content content) {
+    public void create(@Valid @RequestBody Content content) {
         contentCollectionRepository.save(content);
+    }
+
+    @PutMapping("/{id}")
+    public void update(@Valid @RequestBody Content content, @Valid @PathVariable Integer id) {
+        if (contentCollectionRepository.findById(id).isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Content not found"
+            );
+        }
+        contentCollectionRepository.update(content);
     }
 }
