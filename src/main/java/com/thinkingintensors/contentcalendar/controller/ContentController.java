@@ -51,4 +51,9 @@ public class ContentController {
         }
         contentCollectionRepository.update(id, content);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@Valid @PathVariable Integer id) {
+        contentCollectionRepository.delete(id);
+    }
 }

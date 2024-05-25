@@ -37,6 +37,10 @@ public class ContentCollectionRepository {
         jdbcTemplateRepository.updateContent(id, content);
     }
 
+    public void delete(Integer id) {
+        jdbcTemplateRepository.deleteContent(id);
+    }
+
     // Keeping this in here as a reminder that @PostConstruct is an option I could use later.
     /*@PostConstruct
     private void init() {

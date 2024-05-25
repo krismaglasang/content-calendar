@@ -77,4 +77,8 @@ public class ContentJdbcTemplateRepository {
                 content.url()
         );
     }
+
+    public void deleteContent(Integer id) {
+        jdbcTemplate.update("delete from content where id = ?", id);
+    }
 }
