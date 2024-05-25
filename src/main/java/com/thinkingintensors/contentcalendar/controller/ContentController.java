@@ -2,6 +2,7 @@ package com.thinkingintensors.contentcalendar.controller;
 
 import com.thinkingintensors.contentcalendar.model.Content;
 import com.thinkingintensors.contentcalendar.repository.ContentCollectionRepository;
+import com.thinkingintensors.contentcalendar.repository.ContentJdbcTemplateRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,20 +16,20 @@ import java.util.List;
 public class ContentController {
 
     @Autowired
-    private final ContentCollectionRepository contentCollectionRepository;
+    private final ContentJdbcTemplateRepository repository;
 
-    public ContentController(ContentCollectionRepository contentCollectionRepository) {
-        this.contentCollectionRepository = contentCollectionRepository;
+    public ContentController(ContentJdbcTemplateRepository repository) {
+        this.repository = repository;
     }
 
     @GetMapping("")
     public List<Content> findAll() {
-        return contentCollectionRepository.findAll();
+        return repository.getAllContent();
     }
 
     @GetMapping("/{id}")
     public Content findById(@Valid @PathVariable Integer id) {
-        return contentCollectionRepository.findById(id).orElseThrow(
+        return repository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
                         "Content not found"
@@ -38,22 +39,22 @@ public class ContentController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     public void create(@Valid @RequestBody Content content) {
-        contentCollectionRepository.save(content);
+        repository.createContent(content);
     }
 
     @PutMapping("/{id}")
     public void update(@Valid @RequestBody Content content, @Valid @PathVariable Integer id) {
-        if (contentCollectionRepository.findById(id).isEmpty()) {
+        if (repository.findById(id).isEmpty()) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
                     "Content not found"
             );
         }
-        contentCollectionRepository.update(id, content);
+        repository.updateContent(id, content);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@Valid @PathVariable Integer id) {
-        contentCollectionRepository.delete(id);
+        repository.deleteContent(id);
     }
 }

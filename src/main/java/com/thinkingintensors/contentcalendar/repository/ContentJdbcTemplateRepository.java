@@ -80,5 +80,6 @@ public class ContentJdbcTemplateRepository {
 
     public void deleteContent(Integer id) {
         jdbcTemplate.update("delete from content where id = ?", id);
+        jdbcTemplate.execute("select setval(pg_get_serial_sequence('content', 'id'), coalesce(max(id), 1)) from content");
     }
 }
