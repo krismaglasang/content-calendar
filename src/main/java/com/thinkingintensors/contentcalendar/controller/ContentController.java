@@ -3,6 +3,7 @@ package com.thinkingintensors.contentcalendar.controller;
 import com.thinkingintensors.contentcalendar.model.Content;
 import com.thinkingintensors.contentcalendar.repository.ContentCollectionRepository;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequestMapping("/api/content")
 public class ContentController {
 
+    @Autowired
     private final ContentCollectionRepository contentCollectionRepository;
 
     public ContentController(ContentCollectionRepository contentCollectionRepository) {
@@ -47,6 +49,6 @@ public class ContentController {
                     "Content not found"
             );
         }
-        contentCollectionRepository.update(content);
+        contentCollectionRepository.update(id, content);
     }
 }

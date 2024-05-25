@@ -1,13 +1,9 @@
 package com.thinkingintensors.contentcalendar.repository;
 
 import com.thinkingintensors.contentcalendar.model.Content;
-import com.thinkingintensors.contentcalendar.model.Status;
-import com.thinkingintensors.contentcalendar.model.Type;
-import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,23 +14,31 @@ import java.util.Optional;
 @Repository
 public class ContentCollectionRepository {
 
-    private final List<Content> contents = new ArrayList<>();
+    @Autowired
+    private final ContentJdbcTemplateRepository jdbcTemplateRepository;
 
-    public ContentCollectionRepository() {}
+    public ContentCollectionRepository(ContentJdbcTemplateRepository jdbcTemplateRepository) {
+        this.jdbcTemplateRepository = jdbcTemplateRepository;
+    }
 
     public List<Content> findAll() {
-        return contents;
+        return jdbcTemplateRepository.getAllContent();
     }
 
     public Optional<Content> findById(Integer id) {
-        return contents.stream().filter(c -> c.id().equals(id)).findFirst();
+        return jdbcTemplateRepository.findById(id);
     }
 
     public void save(Content content) {
-        contents.add(content);
+        jdbcTemplateRepository.createContent(content);
     }
 
-    @PostConstruct
+    public void update(Integer id, Content content) {
+        jdbcTemplateRepository.updateContent(id, content);
+    }
+
+    // Keeping this in here as a reminder that @PostConstruct is an option I could use later.
+    /*@PostConstruct
     private void init() {
         Content content = new Content(
                 1,
@@ -46,10 +50,5 @@ public class ContentCollectionRepository {
                 null,
                 "https://thinkingintensors.co.nz");
         contents.add(content);
-    }
-
-    public void update(Content content) {
-        contents.removeIf(c -> c.id().equals(content.id()));
-        contents.add(content);
-    }
+    }*/
 }
