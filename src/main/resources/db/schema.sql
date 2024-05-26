@@ -11,7 +11,8 @@ create table if not exists content (
 
 -- seed
 insert into content (title, description, status, content_type, date_created, date_updated, url)
-    values (
+    values
+    (
         'Learning Data Engineering',
         'Learn data engineering end-to-end',
         'IN_PROGRESS',
@@ -19,4 +20,13 @@ insert into content (title, description, status, content_type, date_created, dat
         '2024-05-19 12:34:56',
         null,
         'https://thinkingintensors.co.nz/learning-data-engineering'
-    )
+    ),
+    (
+        'ML in Production',
+        'Take your models from notebooks and ship them to production',
+        'IN_PROGRESS',
+        'ARTICLE',
+        '2024-05-26 12:34:56',
+        null,
+        'https://thinkingintensors.co.nz/ml-in-production'
+    );

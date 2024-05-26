@@ -3,7 +3,6 @@ package com.thinkingintensors.contentcalendar.model;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
-import java.beans.Transient;
 import java.time.LocalDateTime;
 
 public record Content(

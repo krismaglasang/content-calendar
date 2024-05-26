@@ -82,4 +82,12 @@ public class ContentJdbcTemplateRepository {
         jdbcTemplate.update("delete from content where id = ?", id);
         jdbcTemplate.execute("select setval(pg_get_serial_sequence('content', 'id'), coalesce(max(id), 1)) from content");
     }
+
+    public List<Content> findByTitle(String keyword) {
+        String query = """
+                select * from content where title like ?
+                """;
+        String formattedKeyword = "%" + keyword + "%";
+        return jdbcTemplate.query(query, new DataClassRowMapper<>(Content.class), formattedKeyword);
+    }
 }

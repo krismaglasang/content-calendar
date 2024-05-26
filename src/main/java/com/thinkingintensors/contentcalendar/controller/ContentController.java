@@ -1,7 +1,6 @@
 package com.thinkingintensors.contentcalendar.controller;
 
 import com.thinkingintensors.contentcalendar.model.Content;
-import com.thinkingintensors.contentcalendar.repository.ContentCollectionRepository;
 import com.thinkingintensors.contentcalendar.repository.ContentJdbcTemplateRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +55,10 @@ public class ContentController {
     @DeleteMapping("/{id}")
     public void delete(@Valid @PathVariable Integer id) {
         repository.deleteContent(id);
+    }
+
+    @GetMapping("/filter")
+    public List<Content> findByTitle(@RequestParam(name = "keyword") String keyword) {
+        return repository.findByTitle(keyword);
     }
 }
