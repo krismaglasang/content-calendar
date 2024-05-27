@@ -8,7 +8,7 @@ This project is a Spring Boot application for managing content. It uses PostgreS
 
 At the root of the project, create a `.env` file that contains the following:
 ```
-PG_PORT=<insert port>
+PG_PORT=5432
 PG_USERNAME=<insert username>
 PG_PASSWORD=<insert password>
 PG_DB=<insert database name>
@@ -17,7 +17,7 @@ PG_DB=<insert database name>
 To run, open your terminal and type the following command:
 
 ```sh
-docker-compose up --build
+docker compose up --build
 ```
 
 ## Endpoints
@@ -30,7 +30,7 @@ URL: localhost:8080/api/content/{id}
 ### Create a content
 URL: localhost:8080/api/content
 
-Payload:
+Example payload:
 ```json
 {
     "title": "another for deletion right here",
@@ -45,7 +45,8 @@ Payload:
 
 ### Update content
 URL: localhost:8080/api/content/{id}
-Payload:
+
+Example payload:
 ```json
 {
     "title": "for deletion",
