@@ -6,7 +6,15 @@ This project is a Spring Boot application for managing content. It uses PostgreS
 
 ## Getting Started
 
-To run the project, open your terminal and type the following command:
+At the root of the project, create a `.env` file that contains the following:
+```
+PG_PORT=5437
+PG_USERNAME=postgres
+PG_PASSWORD=postgres
+PG_DB=content_calendar_db
+```
+
+To run, open your terminal and type the following command:
 
 ```sh
 docker-compose up --build
