@@ -55,3 +55,10 @@ URL: localhost:8080/api/content/{id}
 
 ### Get by title
 URL: localhost:8080/api/content/filter?keyword={keyword}
+
+## Other Endpoints
+### For testing out profiles
+URL: localhost:8080/home
+
+### Observability and Monitoring
+URL: localhost:8080/actuator
