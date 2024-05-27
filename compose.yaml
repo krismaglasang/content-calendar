@@ -3,7 +3,7 @@ services:
     container_name: pg_for_content_app
     image: postgres
     ports:
-      - ${PG_PORT}:5432
+      - 5437:${PG_PORT}
     environment:
       POSTGRES_USER: ${PG_USERNAME}
       POSTGRES_PASSWORD: ${PG_PASSWORD}
@@ -30,7 +30,3 @@ services:
       - 8080:8080
     env_file:
       - .env
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${PG_DB}
-      SPRING_DATASOURCE_USERNAME: ${PG_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${PG_PASSWORD}
