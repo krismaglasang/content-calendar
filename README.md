@@ -8,10 +8,10 @@ This project is a Spring Boot application for managing content. It uses PostgreS
 
 At the root of the project, create a `.env` file that contains the following:
 ```
-PG_PORT=5437
-PG_USERNAME=postgres
-PG_PASSWORD=postgres
-PG_DB=content_calendar_db
+PG_PORT=<insert port>
+PG_USERNAME=<insert username>
+PG_PASSWORD=<insert password>
+PG_DB=<insert database name>
 ```
 
 To run, open your terminal and type the following command:
